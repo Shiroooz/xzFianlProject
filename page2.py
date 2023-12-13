@@ -23,12 +23,6 @@ def show():
     melted_data = pd.melt(SchoolInfo, id_vars=['Name', 'School Year'], value_vars=['English Language Learner', 'Special Education', 'Collaborative Team Teaching', 'Self Contained Special'], var_name='Special Courses', value_name='Total Enrollment')
     #Delete repeat
     unique_schools = set(melted_data["Name"].tolist())
-    # FIG
-    fig = px.line(melted_data, x='School Year', y='Total Enrollment', color='Special Courses',
-                  title='Special Courses Over School Years',
-                  labels={'Total Enrollment': 'Total Enrollment', 'School Year': 'School Year', 'Special Courses': 'Special Courses'})
-
-    st.plotly_chart(fig)
 
     # Filters
     st.sidebar.title("Filters")
@@ -58,6 +52,15 @@ def show():
     # Count of rows in filtered data
     filterdataset['Total Enrollment'] = pd.to_numeric(filterdataset['Total Enrollment'], errors='coerce')
 
+    # FIG
+    fig = px.line(filterdataset, x='School Year', y='Total Enrollment', color='Special Courses',
+                  title='Special Courses Over School Years',
+                  labels={'Total Enrollment': 'Total Enrollment', 'School Year': 'School Year', 'Special Courses': 'Special Courses'})
+
+    st.plotly_chart(fig)
+
+
+
     if not syr == "All years":
         filterdataset = filterdataset[filterdataset["School Year"] == syr]
 
@@ -78,6 +81,5 @@ def show():
                      title='Special Courses Distribution')
     #st.write(filterdataset)
     st.plotly_chart(fig_pie)
-
 
 

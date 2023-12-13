@@ -53,7 +53,6 @@ def show():
         filterdataset = filterdataset[filterdataset["Name"].isin(shl)]
 
     #another filter for futher questions
-    filterdataset = filterdataset[filterdataset["schoolyear"] == syr]
     #st.dataframe(filterdataset)
 
     #Count
