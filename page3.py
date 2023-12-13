@@ -42,7 +42,7 @@ def show():
 
     syr = st.sidebar.radio(
         'Select Years:',
-        options= SchoolInfo["schoolyear"].unique().tolist())
+        options= ["All years"]+SchoolInfo["School Year"].unique().tolist())
 
     filterdataset = melted_data.copy()
     #st.dataframe(filterdataset)
