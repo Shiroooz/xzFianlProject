@@ -42,7 +42,7 @@ def show():
 
     syr = st.sidebar.radio(
         'Select Years:',
-        options= ["All years"]+SchoolInfo["schoolyear"].unique().tolist())
+        options= SchoolInfo["schoolyear"].unique().tolist())
 
     filterdataset = melted_data.copy()
     #st.dataframe(filterdataset)
@@ -53,13 +53,12 @@ def show():
         filterdataset = filterdataset[filterdataset["Name"].isin(shl)]
 
     #another filter for futher questions
+    filterdataset = filterdataset[filterdataset["schoolyear"] == syr]
     #st.dataframe(filterdataset)
 
     #Count
-    filterdataset['total'] = filterdataset['Grade'].sum()
 
-    if not syr == "All years":
-        filterdataset = filterdataset[filterdataset["schoolyear"] == syr]
+    filterdataset['total'] = filterdataset['Grade'].sum()
 
     total_enrollment = filterdataset['total_enrollment'].sum()
     st.markdown(f"<div style='text-align: center;'><p style='font-size: 20px;"
